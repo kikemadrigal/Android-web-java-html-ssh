@@ -102,12 +102,13 @@ Vamos a ver los clientes
 ## Obtener la ip de tu servidor
 Dentro de tu web pincha en clinetes (que está en el menú superior):
 Verás como aparece una dirección ip en la barra de dirección, en este caso es 192.168.1.102:
+![Configurar aplicación android 2](ssh/images/Configurar_aplicacion_android_2.jpg)
 
-![Configurar aplicación android 1](ssh/images/Configurar_aplicacion_android_1.png)
+
 
 Dentro de la aplicación android pincha en los 3 puntos (el menú) y elige Configuración servidor:
 
-![Configurar aplicación android 2](ssh/images/Configurar_aplicacion_android_2.jpg)
+![Configurar aplicación android 1](ssh/images/Configurar_aplicacion_android_1.png)
 
 Dentro escribe la dirección anterior:
 
