@@ -4,13 +4,13 @@
 
 # Descripción
 
-Permite ejecutar comandos en ordenadores remotos a través de Secure Shell, también tiene un base de datos local con los equipos y una base de datos remota con los clientes y los comandos (carpeta ssh) , también he incorporado la misma versión de la web en codeigniter solamente por motivos pedadógicos de codeigniter.
+Permite ejecutar comandos en ordenadores remotos a través de Secure Shell, también tiene un base de datos local con los equipos y una base de datos remota con los clientes y los comandos (carpeta ssh) , también he incorporado la misma versión de la web en codeigniter solamente por motivos pedadógicos.
 
 # Instalación
 
 Consta de 2 paquetes:
 
-1: Parte android [SSH para android] (https://github.com/kikemadrigal/sshandroid/releases/tag/1.2)
+1: Parte android [SSH para android] (https://github.com/kikemadrigal/ssh/releases/tag/0.0.1)
 
 2: Parte web: carpeta ssh
 
@@ -21,20 +21,16 @@ Consta de 2 paquetes:
 
 
 Muestra la interface para ejecutar los comandos y los clientes.
-Simplemente descarga el apk desde un dispositivo móvil e instala, deberás de tener habilitada la opción de ejecutar aplicaciones desconocidas en tu dispositivo móvil.
-El apj también se encuentra en sshandroid/app/build/outputs/apk/debug
+Simplemente descarga el apk desde [aquí] (https://github.com/kikemadrigal/ssh/releases/tag/0.0.1) en tu dispositivo móvil e instálalo, deberás  tener habilitada la opción de ejecutar aplicaciones desconocidas en tu dispositivo móvil.
+El apk (proyecto empquetado y compilado para android) también se encuentra en sshandroid/app/build/outputs/apk/debug
 
 
 ## Parte Web
 
 
-1.Necesitarás un equipo con un MariaDB/Mysql y un servidor web con apache para ofrecer el API REST, descarga la  de y pégalos en la carpeta donde tienes tus webs,
- en el caso de linux /var/www/html, todas las direcciones son redirigidas al ./index.php para que funcione tendrás que habilitar la sobreescritura en tu servidor web.
-
-2.Instala y configura la parte
-
-3.Configura la dirección de tu API REST en el programa Android:
- Aunque si la dirección del servidor no está configurada te la pregunta puedes modificarla pinchando en el menú (los 3 puntos), en configuración servidor, y en cambiar servor, escribe la dirección de tu web local la cual ofrece el api rest, si has descarga el 2 paquete y lo has pegado donde están tus webs dentro de apache, la dirección será.
+Necesitarás un equipo con un MariaDB/Mysql y un servidor web con apache para ofrecer el API REST.
+Tan solo tienes que copiar y pegar la carpeta ssh en tu servidor web, al poner en el navegador http://localhost/ssh te aparecerá el instalador, ve a "Parte 2, servidor web (con los clientes y los comandos)" para obtener una información más detallada.
+Si eres más atrevido puedes copiar y pegar la carpeta sshcode en tu servidor web, para más información ve a la parte "Parte 3, servidor web hecho con codeigniter"
 
 
 
@@ -65,7 +61,11 @@ El apj también se encuentra en sshandroid/app/build/outputs/apk/debug
 
 
 
-# Parte ssh (servidor web con los clientes y los comandos)
+
+
+
+
+# Parte 2, servidor web (con los clientes y los comandos)
 ---
 Este es el segundo paquete de la aplicación ssh para android
 
@@ -73,7 +73,7 @@ Este es el segundo paquete de la aplicación ssh para android
 ---
 ### Descarga la última versión
 ---
-Para descargar el proyecto web simplemente pincha en el botón Clone or download de github y en Download ZIP, descomprímelo y pega la carpeta ssh con todo su contenido en tu servidor web.
+Para descargar el proyecto entero pincha en el botón Clone or download de github y en Download ZIP, descomprímelo y pega la carpeta ssh con todo su contenido en tu servidor web.
 En el caso de apache2 para ubuntu debes de pegar esta carpeta en /var/www/html:
 
 ![Ubicación ssh](ssh/images/ubicacion_carpeta.png)
@@ -144,14 +144,14 @@ Ahora pincha en clientes y en c¡omando y podrás verlos:
 
 
 
-#Parte 3, servidor web hecho con codeigniter
+# Parte 3, servidor web hecho con codeigniter
 
 
 # Instalación y configuración
-La configuración de este proyecto es complicada y exigede n conocimiento elevado de apache, php y codeigniter.
+La configuración de este proyecto es complicada y exigede un conocimiento elevado de apache, php y codeigniter.
 
 ## Descarga el proyecto
-Descarga el proyecto web pinchando en el botón Clone or Download que aparece arriba de esta página.
+Descarga el proyecto entero pichando en el botón Clone or Download que aparece arriba de esta página, copia y pega la carpeta sshcode en tu servidor web, en el caso de apache2 para ubuntu debes de pegar esta carpeta en /var/www/html.
 
 ## Habilita las rutas amigables
 1.Habilitar mod_rewrite con el siguiente comando:
@@ -286,6 +286,15 @@ $autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos
 
 ##Configura la aplicación android
 
+Dentro de la aplicación android pincha en los 3 puntos (el menú) y elige Configuración servidor:
+
+![Configurar aplicación android 2](sshcode/public/images/Configurar_aplicacion_android_2.jpg)
+
+Obtén la ip de tu host (en ubuntu ifconfig) y pégala:
+
+![Configurar aplicación android 3](sshcode/public/images/Configurar_aplicacion_android_3.jpg)
+
+Cambia a modo codeigniter:
 
 ![Configurar aplicación android 4](sshcode/public/images/Configurar_codeigniter_1.png)
 
