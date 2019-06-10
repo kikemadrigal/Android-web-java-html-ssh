@@ -38,6 +38,15 @@
         android:layout_margin="20dp"
         android:textAlignment="center"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Probar comunicacinó"
+        android:layout_margin="20dp"
+        android:background="@drawable/estilo_dos_boton"
+        android:textColor="@drawable/estilo_uno_texto_boton"
+        android:id="@+id/buttonProbarComunicacionOpcionesActivity"/>
 </LinearLayout>
 
 

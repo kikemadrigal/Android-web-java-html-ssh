@@ -55,7 +55,7 @@ public class OpcionesActivity extends AppCompatActivity {
             }
         });
         if(modoCodeigniter){
-            textViewModoCodeigniter.setText("Modo codeignitr activado");
+            textViewModoCodeigniter.setText("Modo codeigniter activado");
             switchModoCodeigniter.setChecked(true);
         }else{
             textViewModoCodeigniter.setText("Modo codeignitr desactivado");
@@ -68,7 +68,18 @@ public class OpcionesActivity extends AppCompatActivity {
                 abrirDialogoPreguntandoPorServidor();
             }
         });
-
+        Button probarComunicacion=findViewById(R.id.buttonProbarComunicacionOpcionesActivity);
+        probarComunicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean resultadoPing=Util.executeCommandPing(textViewServidor.getText().toString());
+                if(resultadoPing){
+                    Util.crearToast(OpcionesActivity.this, "Se obtuvo respuesta del servidor");
+                }else{
+                    Util.crearToast(OpcionesActivity.this, "No hubo respuesta del servidor");
+                }
+            }
+        });
 
 
 

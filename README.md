@@ -288,15 +288,15 @@ $autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos
 
 Dentro de la aplicación android pincha en los 3 puntos (el menú) y elige Configuración servidor:
 
-![Configurar aplicación android 2](sshcode/public/images/Configurar_aplicacion_android_2.jpg)
+![Configurar aplicación android 2](sshcode/public/images/pantalla_configuracion.png)
 
 Obtén la ip de tu host (en ubuntu ifconfig) y pégala:
 
-![Configurar aplicación android 3](sshcode/public/images/Configurar_aplicacion_android_3.jpg)
+![Configurar aplicación android 3](sshcode/public/images/introducir_ip.png)
 
 Cambia a modo codeigniter:
 
-![Configurar aplicación android 4](sshcode/public/images/Configurar_codeigniter_1.png)
+![Configurar aplicación android 4](sshcode/public/images/mode_code_activado.png)
 
 
 
