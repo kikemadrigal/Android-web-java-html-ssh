@@ -85,13 +85,13 @@ Ahora ve al navegadoir web y escribe localhost/ssh en la barra de direcciones:
 
 Prueba la conexión de la base de datos
 
-![Pruba conexion base de datos](/images/Prueba_conexion_base_de_datos.png)
+![Pruba conexion base de datos](ssh/images/Prueba_conexion_base_de_datos.png)
 
 Crea la base de datos
 
 ![Crea la base de datos](ssh/images/Crea_la_base_de_datos.png)
 
-Vamos a ver los clientes
+Vamos a ver los clientes, picha en ir a la página principal:
 
 ![Ver los clientes 1](ssh/images/Ver_los_clientes_1.png)
 
@@ -100,19 +100,20 @@ Vamos a ver los clientes
 # Configurando la aplicación android
 
 ## Obtener la ip de tu servidor
-Dentro de tu web pincha en clinetes (que está en el menú superior):
+Dentro de la web pincha en clientes (que está en el menú superior):
 Verás como aparece una dirección ip en la barra de dirección, en este caso es 192.168.1.102:
-![Configurar aplicación android 2](ssh/images/Configurar_aplicacion_android_2.jpg)
+![Configurar aplicación android 1](ssh/images/Configurar_aplicacion_android_1.png)
 
 
 
 Dentro de la aplicación android pincha en los 3 puntos (el menú) y elige Configuración servidor:
 
-![Configurar aplicación android 1](ssh/images/Configurar_aplicacion_android_1.png)
+![Configurar aplicación android 3](ssh/images/Configurar_aplicacion_android_3.jpg)
 
 Dentro escribe la dirección anterior:
 
-![Configurar aplicación android 3](ssh/images/Configurar_aplicacion_android_3.jpg)
+![Configurar aplicación android 2](ssh/images/Configurar_aplicacion_android_2.jpg)
+
 
 
 Ahora pincha en clientes y en c¡omando y podrás verlos:
@@ -289,15 +290,15 @@ $autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos
 
 Dentro de la aplicación android pincha en los 3 puntos (el menú) y elige Configuración servidor:
 
-![Configurar aplicación android 2](sshcode/public/images/pantalla_configuracion.png)
+![Configurar aplicación android 2](sshcode/public/images/pantalla_configuracion.jpg)
 
 Obtén la ip de tu host (en ubuntu ifconfig) y pégala:
 
-![Configurar aplicación android 3](sshcode/public/images/introducir_ip.png)
+![Configurar aplicación android 3](sshcode/public/images/introducir_ip.jpg)
 
 Cambia a modo codeigniter:
 
-![Configurar aplicación android 4](sshcode/public/images/mode_code_activado.png)
+![Configurar aplicación android 4](sshcode/public/images/mode_code_activado.jpg)
 
 
 
