@@ -164,7 +164,8 @@ sudo nano /etc/apache2/apache2.conf
 
     2.1. Descomentar la linea (remueve el simbolo #)
 
-AccessFileName .htaccess
+AccessFileName .htaccess  
+
     2.2. Encuentra la siguiente sección
 
 <Directory /var/www/>  
