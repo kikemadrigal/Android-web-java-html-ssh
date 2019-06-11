@@ -162,10 +162,10 @@ sudo a2enmod rewrite
 
 sudo nano /etc/apache2/apache2.conf
 
-2.1. Descomentar la linea (remueve el simbolo #)
+    2.1. Descomentar la linea (remueve el simbolo #)
 
 AccessFileName .htaccess
-2.2. Encuentra la siguiente sección
+    2.2. Encuentra la siguiente sección
 
 <Directory /var/www/>  
      Options Indexes FollowSymLinks  
@@ -178,7 +178,7 @@ Reemplaza “None” por “All” :
 
 AllowOverride All
 
-2.3. Reinicia el servicio de Apache con el siguiente comando:
+    2.3. Reinicia el servicio de Apache con el siguiente comando:
 
 sudo service apache2 restart
 
