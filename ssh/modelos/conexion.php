@@ -4,7 +4,6 @@ class Conexion {
 	public static function abrir_conexion() {
 		if ( !isset( self::$conexion ) ) {
 			try {
-				//include_once( "env.php" );
 				self::$conexion = new PDO( 'mysql:host=' .SERVER. '; dbname=' .DATABASE, USER, PASSWORD );
 				self::$conexion->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 				self::$conexion->exec( "SET CHARACTER SET utf8" );
@@ -12,7 +11,8 @@ class Conexion {
 				//print( 'Conexion abierta' );
 			} catch ( PDOException $ex ) {
 				print( "Error: " . $ex->getMessage() . "<br>" );
-				die();
+				//die();
+				echo "<h1>Servidor: ".SERVER.", user".USER.", passeord".PASSWORD.", ".DATABASE."</h1>";
 			}
 		}
 	}

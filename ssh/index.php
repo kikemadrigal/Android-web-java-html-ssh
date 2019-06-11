@@ -9,9 +9,21 @@ if (mysqli_connect_errno()) {
     if(!empty(SERVER) && SERVER !="SERVER" && !empty(USER)  && USER!="USER" && !empty(PASSWORD) && PASSWROD!="PASSWORD"){
         $mensajeSinConexion .="Direccion servidor: ".SERVER."<br>Usuario: ".USER."<br>Password: ".PASSWORD."<br>";
     }else{
-        //echo "<h4>Es necesiario volver a confifurar los parámetros de la base de datos</h4>";
+       //Si no están las variables de SERVER, USER Y PASSWORD, comprobamos los permisos
+       //33060 -r--r--r-- 
+        //33188 -rw-r--r-- 
+        //33204 -rw-rw-r--
+        //33206 -rw-rw-rw-
+        
+        $permisos = fileperms("config/env.php");
+        
+        if($permisos !=33206){
+            echo $permisos."  <h2>Le faltan los permisos al archivo config/env.php, por favor pon chmod 666 env.php </h2>";
+            die();
+        }
     }
 }else{
+    //echo "hola";
     //Sino está vacío significa que se han escrito los datos en el archivo config/env.php, tenemmos que probar la conexión
     $conn = mysqli_connect(SERVER, USER, PASSWORD, null);
     if (mysqli_connect_errno()) {
@@ -23,15 +35,12 @@ if (mysqli_connect_errno()) {
             echo "<h1>Servidor: ".SERVER.", Usuario: ".USER.",contrseña: ". PASSWORD.", base de datos: ". DATABASE.", no existe la base de datos.";
         }else{
             header( 'Location: http://'.obtenerIpLocal().'/ssh/views/clientes/show.php' ) ;
-           //header( 'Location: '.RUTA_CLIENTES_MOSTRAR.' '  ) ;
-          // echo SERVER."--".USER."--". PASSWORD."--". DATABASE;
-          //$_SERVER['PHP_SELF']
-          //header( 'Location: http://localhost/ssh/views/clientes/show.php' ) ;
+            die();
         }
     }
     
 }
-
+//header( 'Location: http://'.obtenerIpLocal().'/ssh/views/clientes/show.php' ) ;
 
 
 
@@ -48,11 +57,8 @@ if ( isset( $_POST[ 'botonFormularioProbarConexion' ] ) ) {
             $mensajeNoExisteBaseDeDatos= "No Existe la base de datos".mysqli_connect_error();
         }else{
             guardarDatosBaseDedatosEnArchivo($servername,$username,$password);
-            //include_once('util/util.php');
-           // header( 'Location: http://'.obtenerIpLocal().'/ssh/views/clientes/show.php' ) ;
-           //header( 'Location: http://'.RUTA_CLIENTES_MOSTRAR.' ') ;
-           //header( 'Location: http://localhost/ssh/views/clientes/show.php' ) ;
-           header( 'Location: http://'.obtenerIpLocal().'/ssh/views/clientes/show.php' ) ;
+            sleep(5);
+            header( 'Location: http://'.obtenerIpLocal().'/ssh/views/clientes/show.php' ) ;
         }
     }
     //$conn->close();
@@ -99,14 +105,10 @@ function guardarDatosBaseDedatosEnArchivo($servername,$username,$password){
         if($archivo = fopen($direccionArchivo, "a"))
         {
             $texto="
-               
-
-
-            const SERVER=$servername;
-            const USER=$username;
-            const PASSWORD=$password;
-            const DATABASE='ssh';
-            
+            define('SERVER', '$servername');
+            define('USER', '$username');
+            define('PASSWORD', '$password');
+            define('DATABASE','ssh');
             ";
             if(fwrite($archivo,$texto))
             {
@@ -280,7 +282,7 @@ function crearTablaClientesComandos($conexion){
                         ?>
                     </div>
                     <div class="form-group d-flex justify-content-center">
-                        <input type="submit" class="btn btn-primary btn btn-success m-5" id='botonFormularioProbarConexion' name='botonFormularioProbarConexion' value="Probar conexión">
+                        <input type="submit" class="btn btn-primary btn btn-success m-5" id='botonFormularioProbarConexion' name='botonFormularioProbarConexion' value="Probar conexión" data-toggle="modal" data-target="#clienteModal" />
                     </div>
                     
                     
@@ -313,6 +315,31 @@ function crearTablaClientesComandos($conexion){
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="clienteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+       Escribiendo datos.
+       <img src="images/esperar.gif" width='100px' alt="espera" />
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
 
 </body>
 </html>
