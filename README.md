@@ -8,7 +8,7 @@ Permite ejecutar comandos en ordenadores remotos a través de Secure Shell, tamb
 
 # Instalación
 
-Consta de 2 paquetes:
+Consta de 3 paquetes:
 
 1: Parte android [SSH para android] (https://github.com/kikemadrigal/ssh/releases/tag/0.0.1)
 
@@ -248,8 +248,10 @@ INSERT INTO `clientes-comandos` (`id`, `id_cliente`, `id_comando`) VALUES
 
 ## Configura codeigniter
 
-En el archivo application/config/database.php Configura la conexión de la base de datos:
+En el archivo application/config/database.php Configura la conexión de la base de datos:  
+
 ~~~
+
 $active_group = 'default';
 $query_builder = TRUE;
 
@@ -274,17 +276,24 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-~~~
-Otras configuraciones que están guardadas y que deben de aparecer son:
 
-En el archivo application/config/config.php cambia la base_url y el index_page:
+~~~
+
+Otras configuraciones que están guardadas y que deben de aparecer son:  
+
+En el archivo application/config/config.php cambia la base_url y el index_page:  
 $config['base_url'] = 'http://localhost/sshcode/';  
 $config['index_page'] = '';  
 
-En el archivo  application/config/autoload.php utiliza las librerias database y el helper url para no tener que importarlas en ningún archivo:
+En el archivo  application/config/autoload.php utiliza las librerias database y el helper url para no tener que importarlas en ningún archivo:  
+
+~~~
+
 $autoload['libraries'] = array('database','session');  
 $autoload['helper'] = array('url');  
 $autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos_model');  
+
+~~~
 
 
 ##Configura la aplicación android
