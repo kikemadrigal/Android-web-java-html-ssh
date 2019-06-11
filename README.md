@@ -162,10 +162,10 @@ sudo a2enmod rewrite
 
 sudo nano /etc/apache2/apache2.conf
 
-2.1 Descomentar la linea (remueve el simbolo #)
+2.1. Descomentar la linea (remueve el simbolo #)
 
 AccessFileName .htaccess
-2.2 Encuentra la siguiente sección
+2.2. Encuentra la siguiente sección
 
 <Directory /var/www/>  
      Options Indexes FollowSymLinks  
@@ -178,7 +178,7 @@ Reemplaza “None” por “All” :
 
 AllowOverride All
 
-2.3 Reinicia el servicio de Apache con el siguiente comando:
+2.3. Reinicia el servicio de Apache con el siguiente comando:
 
 sudo service apache2 restart
 
@@ -194,11 +194,11 @@ Options FollowSymLinks
 
 ## Crea y rellena la base de datos
 Dentro de workbench o phpmyadmin, tendrás que ejecutar las siguientes sentencias SQL:
-1.Crear la base de datos SSH:
+1. Crear la base de datos SSH:
 ~~~
 CREATE SCHEMA `ssh` DEFAULT CHARACTER SET utf8 ;
 
-2.Crea y rellena la tabla clientes:
+2. Crea y rellena la tabla clientes:
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cif` varchar(50) NOT NULL,
@@ -212,7 +212,7 @@ INSERT INTO `clientes` (`id`, `cif`, `nombre`, `datos`) VALUES
 (2, '02', 'cliente02', 'teléfono 4444, calle Europa'),
 (3, '03', 'cliente03', 'teléfono 2222, calle general');
 
-3.crea y rellena la tabla Comandos:
+3. crea y rellena la tabla Comandos:
 CREATE TABLE `comandos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
@@ -225,7 +225,7 @@ INSERT INTO `comandos` (`id`, `nombre`, `datos`) VALUES
 (2, 'pwd', 'Comando para ver el distorio actual'),
 (3, 'php -v', 'comando para ver la versión de php instalada');
 
-4.Crea y rellena la tabla clientesComandos:
+4. Crea y rellena la tabla clientesComandos:
 CREATE TABLE `clientesComandos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idCliente` int(11) NOT NULL,
@@ -249,6 +249,7 @@ INSERT INTO `clientes-comandos` (`id`, `id_cliente`, `id_comando`) VALUES
 ## Configura codeigniter
 
 En el archivo application/config/database.php Configura la conexión de la base de datos:
+~~~
 $active_group = 'default';
 $query_builder = TRUE;
 
@@ -273,17 +274,17 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
+~~~
 Otras configuraciones que están guardadas y que deben de aparecer son:
 
 En el archivo application/config/config.php cambia la base_url y el index_page:
-$config['base_url'] = 'http://localhost/sshcode/';
-$config['index_page'] = '';
+$config['base_url'] = 'http://localhost/sshcode/';  
+$config['index_page'] = '';  
 
 En el archivo  application/config/autoload.php utiliza las librerias database y el helper url para no tener que importarlas en ningún archivo:
-$autoload['libraries'] = array('database','session');
-$autoload['helper'] = array('url');
-$autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos_model');
+$autoload['libraries'] = array('database','session');  
+$autoload['helper'] = array('url');  
+$autoload['model'] = array('Clientes_model', 'Comandos_model', 'ClientesComandos_model');  
 
 
 ##Configura la aplicación android
