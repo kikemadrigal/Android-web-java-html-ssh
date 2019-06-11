@@ -1,4 +1,4 @@
-package es.tipolisto.sshconnect;
+package es.tipolisto.sshconnect.Activities;
 
 import android.support.test.runner.AndroidJUnit4;
 
