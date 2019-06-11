@@ -156,9 +156,9 @@ La configuración de este proyecto es complicada y exigede un conocimiento eleva
 Descarga el proyecto entero pichando en el botón Clone or Download que aparece arriba de esta página, copia y pega la carpeta sshcode en tu servidor web, en el caso de apache2 para ubuntu debes de pegar esta carpeta en /var/www/html.
 
 ## Habilita las rutas amigables
-1.Habilitar mod_rewrite con el siguiente comando:
+1. Habilitar mod_rewrite con el siguiente comando:
 sudo a2enmod rewrite
-2.Abrir el archivo de configuración de apache con el siguiente comando:
+2. Abrir el archivo de configuración de apache con el siguiente comando:
 
 sudo nano /etc/apache2/apache2.conf
 
@@ -167,11 +167,11 @@ sudo nano /etc/apache2/apache2.conf
 AccessFileName .htaccess
 2.2 Encuentra la siguiente sección
 
-<Directory /var/www/>
-     Options Indexes FollowSymLinks
-     AllowOverride None
-     Require all granted
-</Directory>
+<Directory /var/www/>  
+     Options Indexes FollowSymLinks  
+     AllowOverride None  
+     Require all granted  
+</Directory>  
 Nota: la sección anterior también la puedes encontrar en el archivo:
 
 Reemplaza “None” por “All” :
@@ -182,20 +182,20 @@ AllowOverride All
 
 sudo service apache2 restart
 
-3.creamos el archivo .htaccess en la raiz de nuestra web con el siguiente contenido:
+3. creamos el archivo .htaccess en la raiz de nuestra web con el siguiente contenido:
 
 Options FollowSymLinks
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php/$1 [L]
-</IfModule>
+<IfModule mod_rewrite.c>  
+    RewriteEngine on  
+    RewriteCond %{REQUEST_FILENAME} !-f  
+    RewriteCond %{REQUEST_FILENAME} !-d  
+    RewriteRule ^(.*)$ index.php/$1 [L]  
+</IfModule>  
 
 ## Crea y rellena la base de datos
 Dentro de workbench o phpmyadmin, tendrás que ejecutar las siguientes sentencias SQL:
 1.Crear la base de datos SSH:
-
+~~~
 CREATE SCHEMA `ssh` DEFAULT CHARACTER SET utf8 ;
 
 2.Crea y rellena la tabla clientes:
@@ -242,7 +242,7 @@ INSERT INTO `clientes-comandos` (`id`, `id_cliente`, `id_comando`) VALUES
 (1, 1, 2),
 (2, 1, 3),
 (3, 2, 1);
-
+~~~
 
 
 
