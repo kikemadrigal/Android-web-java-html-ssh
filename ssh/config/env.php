@@ -56,9 +56,3 @@ define('DATABASE',"");
 */
 
 
-            
-            define('SERVER', 'localhost');
-            define('USER', 'root');
-            define('PASSWORD', '4143');
-            define('DATABASE','ssh');
-            
