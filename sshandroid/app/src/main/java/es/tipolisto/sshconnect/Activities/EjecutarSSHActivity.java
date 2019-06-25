@@ -2,8 +2,10 @@ package es.tipolisto.sshconnect.Activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.NavUtils;
@@ -87,12 +89,21 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
             sqlite.close();
             textViewTitulo.setText(conexion.getUsuario()+"@"+conexion.getHost());
             probarEstadoConexion();
-            final ProgressDialog progressDialog=new ProgressDialog(this);
-            progressDialog.setMessage("Ejecutando consulta.");
-            progressDialog.show();
             Util.hideKeyboard(EjecutarSSHActivity.this);
-            rellenarSpinnerComandosPorClienteYEjecutarAlSeleccionar();
-            rellenarSpinnerYEjecutarComandoAlSeleccionar(progressDialog);
+            //Probamos la comunicación con el servidor
+            final SharedPreferences prefs =getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+            String servidor = prefs.getString("servidor", "http://localhost/ssh/api");
+            if(Util.executeCommandPing(servidor)){
+                spinnerComando.setVisibility(View.VISIBLE);
+                spinnerComandosPorCliente.setVisibility(View.VISIBLE);
+                rellenarSpinnerComandosPorClienteYEjecutarAlSeleccionar();
+                rellenarSpinnerYEjecutarComandoAlSeleccionar();
+                //Si no hay comunicación con el servidor ocultamos los spinner
+            }else{
+                spinnerComando.setVisibility(View.GONE);
+                spinnerComandosPorCliente.setVisibility(View.GONE);
+            }
+
         } else {
             textViewResultados.setText("Hubo un error yno sepuede realizarla conexión");
         }
@@ -122,7 +133,7 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
                         Toast.makeText(EjecutarSSHActivity.this, "Hubo un problema con la coexión.", Toast.LENGTH_SHORT).show();
                     }
                 }
-                Log.d("Mensaje", "Click en ejecutar");
+                //Log.d("Mensaje", "Click en ejecutar");
                 break;
         }
     }
@@ -179,8 +190,11 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
 
 
 
-    private void rellenarSpinnerYEjecutarComandoAlSeleccionar(final ProgressDialog progressDialog){
+    private void rellenarSpinnerYEjecutarComandoAlSeleccionar(){
         //Rellenamos el spinner con los datos obtenidos de retorfit
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Ejecutando consulta.");
+        progressDialog.show();
         Call<List<Comando>> callComandos=null;
         if(Util.estaModoCodeigniter(this)){
             callComandos= RetrofitClient.getServiceISSHCode(EjecutarSSHActivity.this).mostrarComandos();
@@ -204,7 +218,7 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onFailure(Call<List<Comando>> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
         //Le añadimos al spinner un escuchador de eventos, al hacer click ejecutar el ssh
@@ -238,6 +252,9 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
 
 
     private void rellenarSpinnerComandosPorClienteYEjecutarAlSeleccionar(){
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Ejecutando consulta.");
+        progressDialog.show();
         final ArrayList<Cliente> arrayListClientes=new ArrayList<>();
         arrayListClientes.add(0,new Cliente(0,"", "Elige un Cliente",""));
         final ArrayList<String> arrayListClientesString=new ArrayList<>();
@@ -256,11 +273,12 @@ public class EjecutarSSHActivity extends AppCompatActivity implements View.OnCli
                 }
                 ArrayAdapter<Cliente> arrayAdapter=new ArrayAdapter<Cliente>(EjecutarSSHActivity.this, android.R.layout.simple_spinner_item, arrayListClientes);
                 spinnerComandosPorCliente.setAdapter(arrayAdapter);
+                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<Cliente>> call, Throwable t) {
-
+                progressDialog.dismiss();
             }
         });
 
